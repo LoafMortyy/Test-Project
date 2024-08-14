@@ -1,37 +1,24 @@
-let lose = numGuesses > 5;
-let lose = numGuesses > MAX_GUESSES
-const players = {
-  '1': {
-    name: '',
-    score: 0
-  },
-  '-1': {
-    name: '',
-    score: 0
-  }
-};
-// Return player 1/-1 if they win, 'T' for tie, null if game still in play
-function getWinner() {
-  let winner = "code the logic to check the board array if there's a winner"
-  if (winner) return winner;
-  // No winner yet, but need to check for tie game
-  return board.includes(null) ? null : 'T';
-}
-function render() {
-  renderBoard();
-  renderScores();
-  renderControls();
-  renderMessages();
-}
-function handleMove(evt) {
-  // Check if we should exit the function
-  // according to the current state
-  // For example, ignore clicks if the
-  // game has been won or is a tie:
-  if (winner) return;
-  // Logic/Code to update all impacted state
-  ...
-  // Visualize all state
-  render();
-}
-<script defer src="js/main.js"></script>
+(ns core
+  (:gen-class))
+
+(assembly-load-from "./extern/OpenTK/lib/net20/OpenTK.dll")
+
+(import [System]
+        [System.IO]
+        [System.Console]
+        [System.Drawing]
+        [OpenTK]
+        [OpenTK.Graphics.ES30 ClearBufferMask]
+        [OpenTK.Graphics.OpenGL GL]
+        [OpenTK.Input]
+        [clojure.lang])
+
+(defonce game (new GameWindow 800 600))
+(def CornflowerBlue Color/CornflowerBlue)
+
+(defn -main []
+  (Console/WriteLine "Starting OpenTK Window.")
+  (GL/ClearColor CornflowerBlue)
+  (GL/Clear ClearBufferMask/ColorBufferBit)
+  (.SwapBuffers game)
+  (.Run game 30.0))
